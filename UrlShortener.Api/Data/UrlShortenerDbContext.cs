@@ -31,7 +31,24 @@ namespace UrlShortener.Api.Data
                     .HasMaxLength(16);
 
                 entity.HasIndex(x => x.ShortCode)
-                    .IsUnique();
+                    .IsUnique()
+                    .HasDatabaseName("UX_UrlMappings_ShortCode");
+
+                //entity.HasIndex(x => x.OriginalUrl)
+                //    .IsUnique()
+                //    .HasDatabaseName("UX_UrlMappings_OriginalUrl");
+
+                entity.Property(x => x.OriginalUrlHash)
+                    .IsRequired()
+                    .HasMaxLength(64)
+                    .IsUnicode(false);
+
+                entity.HasIndex(x => x.OriginalUrlHash)
+                    .IsUnique()
+                    .HasDatabaseName("UX_UrlMappings_OriginalUrlHash");
+
+
+
 
                 entity.Property(x => x.CreatedAtUtc)
                     .IsRequired();

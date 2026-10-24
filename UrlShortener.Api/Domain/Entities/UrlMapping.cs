@@ -6,6 +6,9 @@
 
         public string OriginalUrl { get; set; } = string.Empty;
 
+        public string OriginalUrlHash { get; set; } = string.Empty;
+
+
         public string ShortCode { get; set; } = string.Empty;
 
         public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;

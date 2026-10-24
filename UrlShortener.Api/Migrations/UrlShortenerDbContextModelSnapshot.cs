@@ -38,6 +38,12 @@ namespace UrlShortener.Api.Migrations
                         .HasMaxLength(2048)
                         .HasColumnType("nvarchar(2048)");
 
+                    b.Property<string>("OriginalUrlHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
                     b.Property<string>("ShortCode")
                         .IsRequired()
                         .HasMaxLength(16)
@@ -45,8 +51,13 @@ namespace UrlShortener.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OriginalUrlHash")
+                        .IsUnique()
+                        .HasDatabaseName("UX_UrlMappings_OriginalUrlHash");
+
                     b.HasIndex("ShortCode")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("UX_UrlMappings_ShortCode");
 
                     b.ToTable("UrlMappings", (string)null);
                 });

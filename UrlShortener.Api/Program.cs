@@ -31,6 +31,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
+// Started working on URl Valid BugFix
 
 app.UseMiddleware<ExceptionMiddleware>();
 

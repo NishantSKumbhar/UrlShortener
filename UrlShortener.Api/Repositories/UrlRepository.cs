@@ -14,12 +14,12 @@ namespace UrlShortener.Api.Repositories
         }
         
 
-        public Task<UrlMapping?> GetByOriginalUrlAsync(string originalUrl, CancellationToken cancellationToken = default)
+        public Task<UrlMapping?> GetByOriginalUrlHashAsync(string originalUrlHash, CancellationToken cancellationToken = default)
         {
             return _context.UrlMappings
             .AsNoTracking()
             .FirstOrDefaultAsync(
-                x => x.OriginalUrl == originalUrl,
+                x => x.OriginalUrlHash == originalUrlHash,
                 cancellationToken);
         }
 

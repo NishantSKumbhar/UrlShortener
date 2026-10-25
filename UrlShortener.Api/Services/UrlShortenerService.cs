@@ -33,9 +33,10 @@ namespace UrlShortener.Api.Services
                     "Only absolute HTTP and HTTPS URLs are supported.");
             }
 
+            string originalUrlHash = UrlHashHelper.Compute(request.OriginalUrl);
             // 1. Return an existing mapping if the exact URL is already saved.
-            var existing = await _repository.GetByOriginalUrlAsync(
-                request.OriginalUrl,
+            var existing = await _repository.GetByOriginalUrlHashAsync(
+                originalUrlHash,
                 cancellationToken);
 
             if (existing is not null)
@@ -49,6 +50,7 @@ namespace UrlShortener.Api.Services
                 var mapping = new UrlMapping
                 {
                     OriginalUrl = request.OriginalUrl,
+                    OriginalUrlHash= originalUrlHash,
                     ShortCode = GenerateShortCode(),
                     CreatedAtUtc = DateTime.UtcNow
                 };
@@ -62,7 +64,7 @@ namespace UrlShortener.Api.Services
                 {
                     // A concurrent request may have saved the same original URL.
                     var existingAfterFailure =
-                        await _repository.GetByOriginalUrlAsync(
+                        await _repository.GetByOriginalUrlHashAsync(
                             request.OriginalUrl,
                             cancellationToken);
 

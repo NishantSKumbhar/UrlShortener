@@ -4,8 +4,8 @@ namespace UrlShortener.Api.Repositories
 {
     public interface IUrlRepository
     {
-        Task<UrlMapping?> GetByOriginalUrlAsync(
-        string originalUrl,
+        Task<UrlMapping?> GetByOriginalUrlHashAsync(
+        string originalUrlHash,
         CancellationToken cancellationToken = default);
 
         Task<UrlMapping?> GetByShortCodeAsync(

@@ -7,6 +7,8 @@ namespace UrlShortener.Api.Services
     {
         public static string Compute(string originalUrl)
         {
+            ArgumentNullException.ThrowIfNull(originalUrl);
+
             var bytes = Encoding.UTF8.GetBytes(originalUrl);
             var hash = SHA256.HashData(bytes);
             return Convert.ToHexString(hash);

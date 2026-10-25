@@ -30,6 +30,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+// Started working on URl Valid BugFix
+
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
